@@ -1,0 +1,46 @@
+{
+    "name": "jobmetric/laravel-brand",
+    "description": "This is a brand management package for Laravel that you can use in your projects.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "jobmetric",
+        "package",
+        "brand",
+        "management"
+    ],
+    "homepage": "https://doc.jobmetric.net/package/laravel-brand",
+    "authors": [
+        {
+            "name": "Majid Mohammadian",
+            "email": "majeedmohammadian@gmail.com",
+            "homepage": "https://www.linkedin.com/in/majidmohammadian/",
+            "role": "Full Stack Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.1",
+        "laravel/framework": ">=9.19",
+        "jobmetric/laravel-package-core": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "JobMetric\\Brand\\": "src/",
+            "JobMetric\\Brand\\Factories\\": "database/factories/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JobMetric\\Brand\\BrandServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "support": {
+        "issues": "https://github.com/jobmetric/laravel-brand/issues",
+        "forum": "https://twitter.com/jobmetric",
+        "source": "https://github.com/jobmetric/laravel-brand"
+    }
+}
