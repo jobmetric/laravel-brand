@@ -69,10 +69,11 @@ class Brand
      *
      * @param array $filter
      * @param array $with
+     * @param string|null $mode
      *
      * @return QueryBuilder
      */
-    public function query(array $filter = [], array $with = []): QueryBuilder
+    public function query(array $filter = [], array $with = [], string $mode = null): QueryBuilder
     {
         $fields = [
             'id',
@@ -84,8 +85,17 @@ class Brand
             'updated_at'
         ];
 
-        $query = QueryBuilder::for(BrandModel::class)
-            ->allowedFields($fields)
+        $query = QueryBuilder::for(BrandModel::class);
+
+        if ($mode === 'withTrashed') {
+            $query->withTrashed();
+        }
+
+        if ($mode === 'onlyTrashed') {
+            $query->onlyTrashed();
+        }
+
+        $query->allowedFields($fields)
             ->allowedSorts($fields)
             ->allowedFilters($fields)
             ->defaultSort('-id')
@@ -104,13 +114,14 @@ class Brand
      * @param array $filter
      * @param int $page_limit
      * @param array $with
+     * @param string|null $mode
      *
      * @return AnonymousResourceCollection
      */
-    public function paginate(array $filter = [], int $page_limit = 15, array $with = []): AnonymousResourceCollection
+    public function paginate(array $filter = [], int $page_limit = 15, array $with = [], string $mode = null): AnonymousResourceCollection
     {
         return BrandResource::collection(
-            $this->query($filter, $with)->paginate($page_limit)
+            $this->query($filter, $with, $mode)->paginate($page_limit)
         );
     }
 
@@ -119,13 +130,14 @@ class Brand
      *
      * @param array $filter
      * @param array $with
+     * @param string|null $mode
      *
      * @return AnonymousResourceCollection
      */
-    public function all(array $filter = [], array $with = []): AnonymousResourceCollection
+    public function all(array $filter = [], array $with = [], string $mode = null): AnonymousResourceCollection
     {
         return BrandResource::collection(
-            $this->query($filter, $with)->get()
+            $this->query($filter, $with, $mode)->get()
         );
     }
 
