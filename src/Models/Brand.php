@@ -10,6 +10,7 @@ use JobMetric\Brand\Events\BrandAllowMemberCollectionEvent;
 use JobMetric\Brand\Events\BrandMediaAllowCollectionEvent;
 use JobMetric\Layout\Contracts\LayoutContract;
 use JobMetric\Layout\HasLayout;
+use JobMetric\Like\HasLike;
 use JobMetric\Media\Contracts\MediaContract;
 use JobMetric\Media\HasFile;
 use JobMetric\Membership\Contracts\MemberContract;
@@ -47,6 +48,7 @@ class Brand extends Model implements TranslationContract, MediaContract, MetaCon
         HasMeta,
         Metaable,
         HasMember,
+        HasLike,
         HasLayout,
         Urlable;
 

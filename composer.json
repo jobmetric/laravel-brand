@@ -26,6 +26,7 @@
         "jobmetric/laravel-translation": "^2.6",
         "jobmetric/laravel-metadata": "^2.2",
         "jobmetric/laravel-membership": "^1.2",
+        "jobmetric/laravel-like": "^1.4",
         "jobmetric/laravel-layout": "^1.1",
         "jobmetric/laravel-url": "^1.0",
         "jobmetric/media": "^1.0",
