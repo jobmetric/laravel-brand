@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static array store(array $data)
  * @method static array update(int $brand_id, array $data)
  * @method static array delete(int $brand_id)
+ * @method static array restore(int $brand_id)
+ * @method static array forceDelete(int $brand_id)
  * @method static array usedIn(int $brand_id)
  * @method static bool hasUsed(int $brand_id)
  *

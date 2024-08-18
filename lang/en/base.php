@@ -21,6 +21,8 @@ return [
         "created" => "Brand created successfully.",
         "updated" => "Brand updated successfully.",
         "deleted" => "Brand deleted successfully.",
+        "restored" => "Brand restored successfully.",
+        "permanently_deleted" => "Brand permanently deleted successfully.",
         "used_in" => "Brand used in ':count' places.",
         "attached" => "Brand attached successfully.",
         "detached" => "Brand detached successfully.",

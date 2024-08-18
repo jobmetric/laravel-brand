@@ -9,6 +9,8 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use JobMetric\Brand\Events\BrandDeleteEvent;
+use JobMetric\Brand\Events\BrandForceDeleteEvent;
+use JobMetric\Brand\Events\BrandRestoreEvent;
 use JobMetric\Brand\Events\BrandStoreEvent;
 use JobMetric\Brand\Events\BrandUpdateEvent;
 use JobMetric\Brand\Exceptions\BrandNotFoundException;
@@ -341,6 +343,76 @@ class Brand
                 'ok' => true,
                 'data' => $data,
                 'message' => trans('brand::base.messages.deleted'),
+                'status' => 200
+            ];
+        });
+    }
+
+    /**
+     * Restore the specified brand.
+     *
+     * @param int $brand_id
+     *
+     * @return array
+     * @throws Throwable
+     */
+    public function restore(int $brand_id): array
+    {
+        return DB::transaction(function () use ($brand_id) {
+            /**
+             * @var BrandModel $brand
+             */
+            $brand = BrandModel::onlyTrashed()->find($brand_id);
+
+            if (!$brand) {
+                throw new BrandNotFoundException($brand_id);
+            }
+
+            event(new BrandRestoreEvent($brand));
+
+            $data = BrandResource::make($brand);
+
+            $brand->restore();
+
+            return [
+                'ok' => true,
+                'data' => $data,
+                'message' => trans('brand::base.messages.restored'),
+                'status' => 200
+            ];
+        });
+    }
+
+    /**
+     * Force Delete the specified brand.
+     *
+     * @param int $brand_id
+     *
+     * @return array
+     * @throws Throwable
+     */
+    public function forceDelete(int $brand_id): array
+    {
+        return DB::transaction(function () use ($brand_id) {
+            /**
+             * @var BrandModel $brand
+             */
+            $brand = BrandModel::onlyTrashed()->find($brand_id);
+
+            if (!$brand) {
+                throw new BrandNotFoundException($brand_id);
+            }
+
+            event(new BrandForceDeleteEvent($brand));
+
+            $data = BrandResource::make($brand);
+
+            $brand->forceDelete();
+
+            return [
+                'ok' => true,
+                'data' => $data,
+                'message' => trans('brand::base.messages.permanently_deleted'),
                 'status' => 200
             ];
         });

@@ -175,6 +175,72 @@ class BrandTest extends BaseBrand
     /**
      * @throws Throwable
      */
+    public function test_restore()
+    {
+        // store brand
+        $brandStore = $this->create_brand();
+
+        // delete the brand
+        $brand = Brand::delete($brandStore['data']->id);
+
+        // restore the brand
+        $brand = Brand::restore($brandStore['data']->id);
+
+        $this->assertIsArray($brand);
+        $this->assertTrue($brand['ok']);
+        $this->assertEquals($brand['message'], trans('brand::base.messages.restored'));
+        $this->assertEquals(200, $brand['status']);
+
+        $this->assertDatabaseHas('brands', [
+            'id' => $brandStore['data']->id,
+        ]);
+
+        // restore the brand again
+        try {
+            $brand = Brand::restore($brandStore['data']->id);
+
+            $this->assertIsArray($brand);
+        } catch (Throwable $e) {
+            $this->assertInstanceOf(BrandNotFoundException::class, $e);
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function test_force_delete()
+    {
+        // store brand
+        $brandStore = $this->create_brand();
+
+        // delete the brand
+        $brand = Brand::delete($brandStore['data']->id);
+
+        // force deletes the brand
+        $brand = Brand::forceDelete($brandStore['data']->id);
+
+        $this->assertIsArray($brand);
+        $this->assertTrue($brand['ok']);
+        $this->assertEquals($brand['message'], trans('brand::base.messages.permanently_deleted'));
+        $this->assertEquals(200, $brand['status']);
+
+        $this->assertDatabaseMissing('brands', [
+            'id' => $brandStore['data']->id,
+        ]);
+
+        // restore the brand again
+        try {
+            $brand = Brand::forceDelete($brandStore['data']->id);
+
+            $this->assertIsArray($brand);
+        } catch (Throwable $e) {
+            $this->assertInstanceOf(BrandNotFoundException::class, $e);
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
     public function test_pagination()
     {
         // Store a brand
