@@ -22,7 +22,14 @@
     "require": {
         "php": ">=8.0.1",
         "laravel/framework": ">=9.19",
-        "jobmetric/laravel-package-core": "^1.7"
+        "jobmetric/laravel-package-core": "^1.12",
+        "jobmetric/laravel-translation": "^2.6",
+        "jobmetric/laravel-metadata": "^2.2",
+        "jobmetric/laravel-membership": "^1.2",
+        "jobmetric/laravel-layout": "^1.1",
+        "jobmetric/laravel-url": "^1.0",
+        "jobmetric/media": "^1.0",
+        "spatie/laravel-query-builder": "^5.7"
     },
     "autoload": {
         "files": [
@@ -33,11 +40,19 @@
             "JobMetric\\Brand\\Factories\\": "database/factories/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "JobMetric\\Brand\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "JobMetric\\Brand\\BrandServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Brand": "JobMetric\\Brand\\Facades\\Brand"
+            }
         }
     },
     "minimum-stability": "stable",
