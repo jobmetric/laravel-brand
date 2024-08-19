@@ -21,7 +21,7 @@ use JobMetric\Metadata\Metaable;
 use JobMetric\PackageCore\Models\HasBooleanStatus;
 use JobMetric\Translation\Contracts\TranslationContract;
 use JobMetric\Translation\HasTranslation;
-use JobMetric\Url\Urlable;
+use JobMetric\Url\HasUrl;
 
 /**
  * JobMetric\Brand\Models\Brand
@@ -50,7 +50,7 @@ class Brand extends Model implements TranslationContract, MediaContract, MetaCon
         HasMember,
         HasLike,
         HasLayout,
-        Urlable;
+        HasUrl;
 
     protected $fillable = [
         'status',
