@@ -43,7 +43,7 @@ class BrandTest extends BaseBrand
 
         $this->assertIsArray($brand);
         $this->assertFalse($brand['ok']);
-        $this->assertEquals($brand['message'], trans('brand::base.validation.errors'));
+        $this->assertEquals($brand['message'], trans('package-core::base.validation.errors'));
         $this->assertEquals(422, $brand['status']);
     }
 
